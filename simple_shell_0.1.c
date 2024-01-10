@@ -1,79 +1,59 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <sys/wait.h>
-#include <string.h>
+#include "main.h"
 
-#define MAX_TOKENS 100
-
-/**
- * Description-  Tokenizes a command string into an array of tokens.
- *
- * @param- command The command string to tokenize.
- * @return- An array of tokens, or NULL on error.
- */
-char **tokenize(char *command)
+void execute_command(char *line)
 {
-	static char *tokens[MAX_TOKENS];
-	int token_count = 0;
+	pid_t pid = fork();
 
-	char *token = strtok(command, " ");
-
-	while (token != NULL && token_count < MAX_TOKENS)
+	if (pid == -1)
 	{
-		tokens[token_count++] = token;
-		token = strtok(NULL, " ");
+		perror("fork");
+		exit(EXIT_FAILURE);
 	}
 
-	tokens[token_count] = NULL;
-
-	return (tokens);
+	if (pid == 0)
+	{
+		/* Child process */
+		if (execlp(line, line, (char *)NULL) == -1)
+		{
+			/* Print error message if executable is not found */
+			fprintf(stderr, "./shell: No such file or directory\n");
+			exit(EXIT_FAILURE);
+		}
+	}
+	else
+	{
+		/* Parent process */
+		wait(NULL);
+	}
 }
 
-/**
- * Main- function for the simple shell.
- *
- * @param- argc Argument count.
- * @param- argv Argument vector.
- * @return- 0 on success, non-zero on error.
- */
-int main(int argc, char **argv)
+int main(void)
 {
-	char *command;
-	char **args;
-	int status;
+	char *line;
+	size_t len = 0;
+	ssize_t read;
 
 	while (1)
 	{
 		printf("#cisfun$ ");
-		command = fgets(command, 1024, stdin);
+		read = getline(&line, &len, stdin);
 
-		if (command == NULL)
+		if (read == -1)
 		{
+			/* Handle end of file (Ctrl+D) */
 			printf("\n");
 			break;
 		}
 
-		command[strcspn(command, "\n")] = '\0';
-		args = tokenize(command);
+		/* Remove newline character at the end */
+		if (line[read - 1] == '\n')
+		{
+			line[read - 1] = '\0';
+		}
 
-		pid_t pid = fork();
-
-		if (pid < 0)
-		{
-			perror(argv[0]);
-		}
-		else if (pid == 0)
-		{
-			execve(args[0], args, environ);
-			perror(argv[0]);
-			exit(1);
-		}
-		else
-		{
-			wait(&status);
-		}
+		execute_command(line);
 	}
 
-	return (0);
+	free(line);
+	return 0;
 }
