@@ -1,0 +1,110 @@
+.\" Manpage for the simple shell
+.TH SIMPLE-SHELL 1 "August 2024" "1.0" "Simple Shell Manual"
+.SH NAME
+simple-shell \- A simple Unix shell
+.SH SYNOPSIS
+.B simple-shell
+[\fIoptions\fR]
+.SH DESCRIPTION
+.B simple-shell
+is a simple Unix shell designed for learning and experimentation purposes. It provides basic functionalities of a shell, such as command execution, built-in commands, and support for user-defined aliases.
+
+.SH OPTIONS
+.TP
+.B \-h, \-\-help
+Display a help message with a summary of the shell’s features and commands.
+.TP
+.B \-v, \-\-version
+Display version information about the shell.
+.TP
+.B \-c \fIcommand\fR
+Execute a single command and then exit. This is useful for scripting and automation.
+
+.SH COMMANDS
+The shell supports the following built-in commands:
+
+.TP
+.B exit
+Exit the shell. Optionally, a status code can be provided to indicate the exit status.
+
+.TP
+.B cd \fIdirectory\fR
+Change the current working directory to \fIdirectory\fR. If no directory is specified, change to the home directory.
+
+.TP
+.B env
+Display the current environment variables.
+
+.TP
+.B setenv \fIvar=value\fR
+Set an environment variable \fIvar\fR to \fIvalue\fR.
+
+.TP
+.B unsetenv \fIvar\fR
+Unset the environment variable \fIvar\fR.
+
+.TP
+.B alias \fIname=value\fR
+Create a new alias or modify an existing one. An alias maps \fIname\fR to \fIvalue\fR.
+
+.TP
+.B unalias \fIname\fR
+Remove the alias \fIname\fR.
+
+.TP
+.B help
+Display a help message with a summary of available built-in commands.
+
+.SH ALIASES
+Aliases are used to create shortcuts for longer commands. The following syntax is used:
+
+.TP
+.B alias \fIname=value\fR
+Define an alias \fIname\fR with the command \fIvalue\fR.
+
+.TP
+.B unalias \fIname\fR
+Remove the alias \fIname\fR.
+
+.SH ENVIRONMENT VARIABLES
+The shell respects standard environment variables such as:
+
+.TP
+.B HOME
+The home directory of the current user.
+
+.TP
+.B PATH
+A colon-separated list of directories where the shell looks for executable files.
+
+.SH EXIT STATUS
+The shell exits with the following status codes:
+
+.TP
+.B 0
+Successful execution.
+
+.TP
+.B 1
+An error occurred.
+
+.SH FILES
+.TP
+.B ~/.simple_shell_history
+History file for the shell commands.
+
+.SH SEE ALSO
+.BR bash (1),
+.BR sh (1),
+.BR zsh (1).
+
+.SH AUTHOR
+Written by Ronald Odongo.
+
+.SH REPORTING BUGS
+Report bugs to <ronaldodongo27@gmail.com>. <boochimo8@gmail.com>
+
+.SH COPYRIGHT
+Copyright © 2024 Ronald Odongo. Zakariya Mohamed
+This is free software; see the source for copying conditions. There is NO warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+

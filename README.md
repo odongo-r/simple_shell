@@ -1,55 +1,152 @@
-0x16. C - Simple Shell
+# Simple Shell
 
-Requirements
+A simple Unix shell designed for learning and experimentation. This shell provides basic functionalities including command execution, built-in commands, and support for user-defined aliases.
 
-General
-Allowed editors: vi, vim, emacs
-All your files will be compiled on Ubuntu 20.04 LTS using gcc, using the options -Wall -Werror -Wextra -pedantic -std=gnu89
-All your files should end with a new line
-A README.md file, at the root of the folder of the project is mandatory
-Your code should use the Betty style. It will be checked using betty-style.pl and betty-doc.pl
-Your shell should not have any memory leaks
-No more than 5 functions per file
-All your header files should be include guarded
-Use system calls only when you need to (why?)
-Write a README with the description of your project
-You should have an AUTHORS file at the root of your repository, listing all individuals having contributed content to the repository. Format, see Docker
+## Features
 
-GitHub
-*There should be one project repository per group. If you and your partner have a repository with the same name in both your accounts, you risk a 0% score. Add your partner as a collaborator. *
+- Basic command execution
+- Built-in commands for navigation and environment management
+- User-defined aliases
+- Simple history management
 
+## Installation
 
-List of allowed functions and system calls
-access (man 2 access)
-chdir (man 2 chdir)
-close (man 2 close)
-closedir (man 3 closedir)
-execve (man 2 execve)
-exit (man 3 exit)
-_exit (man 2 _exit)
-fflush (man 3 fflush)
-fork (man 2 fork)
-free (man 3 free)
-getcwd (man 3 getcwd)
-getline (man 3 getline)
-getpid (man 2 getpid)
-isatty (man 3 isatty)
-kill (man 2 kill)
-malloc (man 3 malloc)
-open (man 2 open)
-opendir (man 3 opendir)
-perror (man 3 perror)
-read (man 2 read)
-readdir (man 3 readdir)
-signal (man 2 signal)
-stat (__xstat) (man 2 stat)
-lstat (__lxstat) (man 2 lstat)
-fstat (__fxstat) (man 2 fstat)
-strtok (man 3 strtok)
-wait (man 2 wait)
-waitpid (man 2 waitpid)
-wait3 (man 2 wait3)
-wait4 (man 2 wait4)
-write (man 2 write)
+### Prerequisites
+
+- GCC (GNU Compiler Collection)
+- Make (optional, for build automation)
+
+### Build Instructions
+
+1. **Clone the Repository**
+
+```
+   git clone https://github.com/odongoron/simple-shell.git
+   cd simple-shell
+ ```
+
+2. **Compile the Shell**
+
+Use the following command to compile the shell:
+
+```
+gcc -Wall -Werror -Wextra -pedantic -std=gnu89 *.c -o simple-shell
+```
+This will generate an executable named simple-shell.
 
 
+## Usage
+**Starting the Shell**
+
+To start the shell, simply run:
+
+```
+./simple-shell
+```
+
+**Command Syntax**
+
+    Exit the Shell
+
+  ```
+    exit
+
+  ```
+
+Exit the shell. Optionally, a status code can be provided.
+
+**Change Directory**
+
+```
+cd [directory]
+
+```
+
+Change the current working directory to directory. If no directory is specified, change to the home directory.
+
+**Display Environment Variables**
+
+```
+env
+```
+Display the current environment variables.
+
+**Set Environment Variable**
+
+```
+setenv VARIABLE=value
+```
+Set an environment variable VARIABLE to value.
+
+**Unset Environment Variable**
+
+```
+unsetenv VARIABLE
+```
+Unset the environment variable VARIABLE.
+
+**Create or Modify Alias**
+
+```
+alias name=command
+```
+Create a new alias name with the command command.
+
+**Remove Alias**
+
+```
+unalias name
+```
+Remove the alias name.
+
+**Display Help**
+
+  ```
+    help
+  ```
+Display a help message with a summary of available built-in commands.
+
+## Aliases
+
+Aliases are used to create shortcuts for longer commands. Use the following syntax:
+
+  **Define Alias**
+
+```
+    alias name=command
+```
+Remove Alias
+
+```
+    unalias name
+```
+
+## Environment Variables
+
+The shell respects standard environment variables:
+
+    HOME: The home directory of the current user.
+    PATH: A colon-separated list of directories where the shell looks for executable files.
+
+**Exit Status**
+
+The shell returns the following exit statuses:
+
+    0: Successful execution.
+    1: An error occurred.
+
+**Files**
+
+    ~/.simple_shell_history: History file for the shell commands.
+
+## Contributing
+
+Contributions are welcome! Please open an issue or submit a pull request if you have suggestions or improvements.
+
+## Author
+
+Ronald Odongo and Victor Maiyo
+
+## License
+
+This project is licensed under the MIT License. See the LICENSE file for details.
